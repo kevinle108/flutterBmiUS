@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const bottomContainerHeight = 80.0;
-const cardColor = Color(0xFF1D1E33);
+const activeCardColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 
 class InputPage extends StatefulWidget {
   @override
@@ -22,31 +24,31 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: cardColor,)
+                  child: ReusableCard(color: activeCardColor,)
                 ),
                 Expanded(
-                  child: ReusableCard(color: cardColor,),
+                  child: ReusableCard(color: activeCardColor,),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(color: cardColor,)
+            child: ReusableCard(color: activeCardColor,)
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: cardColor,)
+                  child: ReusableCard(color: activeCardColor,)
                 ),
                 Expanded(
-                  child: ReusableCard(color: cardColor,)
+                  child: ReusableCard(color: activeCardColor,)
                 ),
               ],
             ),
           ),
           Container(
-            color: Color(0xFFEB1555),
+            color: bottomContainerColor,
             height: bottomContainerHeight,
             width: double.infinity,
             margin: EdgeInsets.only(top: 10),
