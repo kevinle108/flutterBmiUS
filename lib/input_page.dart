@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0xFF1D1E33);
@@ -24,10 +25,20 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor,)
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: IconContent(
+                      iconData: FontAwesomeIcons.mars,
+                      label: 'MALE',),
+                  )
                 ),
                 Expanded(
-                  child: ReusableCard(color: activeCardColor,),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild:  IconContent(
+                      iconData: FontAwesomeIcons.venus,
+                      label: 'FEMALE',)
+                  ),
                 ),
               ],
             ),
@@ -59,9 +70,33 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
+class IconContent extends StatelessWidget {
+  final IconData iconData;
+  final String label;
+
+  IconContent({this.iconData, this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconData, size: 80),
+        SizedBox(height: 15,),
+        Text(
+          label,
+          style: TextStyle(color: Color(0xFF8D8E98), fontSize: 18),
+        ),
+      ],
+    );
+  }
+}
+
 class ReusableCard extends StatelessWidget {
   final Color color;
-  ReusableCard({this.color});
+  final Widget cardChild;
+
+  ReusableCard({@required this.color, this.cardChild});
 
   // Color(0xFF1D1E33)
   @override
@@ -72,6 +107,7 @@ class ReusableCard extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(10),
       ),
+      child: cardChild,
     );
   }
 }
