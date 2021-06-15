@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:bmi_calculator/minus_plus_card.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,100 +121,59 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: ReusableCard(
-                  color: kActiveCardColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'WEIGHT',
-                        style: kLabelTextStyle,
-                      ),
-                      Text(
-                        weight.toString(),
-                        style: kNumberTextStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundIconButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPress: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },
-                          ),
-                          SizedBox(width: 10.0,),
-                          RoundIconButton(
-                            icon: FontAwesomeIcons.plus,
-                            onPress: () {
-                              setState(() {
-                                weight++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )),
+                  child: MinusPlusCard(
+                    label: 'WEIGHT',
+                    unit: 'kg',
+                    value: 50,
+                    onMinus: () {
+                      setState(() {
+                        weight--;
+                      });
+                    },
+                    onPlus: () {
+                      setState(() {
+                        weight++;
+                      });
+                    },
+                  )
+                ),
                 Expanded(
-                    child: ReusableCard(
-                  color: kActiveCardColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'AGE',
-                            style: kLabelTextStyle,
-                          ),
-                          Text(
-                            age.toString(),
-                            style: kNumberTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPress: () {
-                                  setState(() {
-                                    age--;
-                                  });
-                                },
-                              ),
-                              SizedBox(width: 10.0,),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPress: () {
-                                  setState(() {
-                                    age++;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                )),
+                  child: MinusPlusCard(
+                    label: 'AGE',
+                    unit: 'y/o',
+                    value: 20,
+                    onMinus: () {
+                      setState(() {
+                        age--;
+                      });
+                    },
+                    onPlus: () {
+                      setState(() {
+                        age++;
+                      });
+                    },
+                  ),
+                ),
               ],
             ),
           ),
-          BottomButton(buttonTitle: 'CALCULATE', onTap: () {
-            CalculatorBrain calc = CalculatorBrain(height: height, weight: weight);
-            // Navigator.pushNamed(context, '/results');
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(
-              bmiResult: calc.calculateBMI(),
-              resultText: calc.getResult(),
-              interpretation: calc.getInterpretation(),
-            )));
-          }),
+          BottomButton(
+              buttonTitle: 'CALCULATE',
+              onTap: () {
+                CalculatorBrain calc =
+                    CalculatorBrain(height: height, weight: weight);
+                // Navigator.pushNamed(context, '/results');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultsPage(
+                              bmiResult: calc.calculateBMI(),
+                              resultText: calc.getResult(),
+                              interpretation: calc.getInterpretation(),
+                            )));
+              }),
         ],
       ),
     );
   }
 }
-
-
-
