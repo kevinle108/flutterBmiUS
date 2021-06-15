@@ -15,6 +15,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,10 @@ class _InputPageState extends State<InputPage> {
                       height.toString(),
                       style: kNumberTextStyle,
                     ),
-                    Text('cm', style: kLabelTextStyle,),
+                    Text(
+                      'cm',
+                      style: kLabelTextStyle,
+                    ),
                   ],
                 ),
                 SliderTheme(
@@ -102,7 +106,6 @@ class _InputPageState extends State<InputPage> {
                         height = newValue.toInt();
                       });
                     },
-
                   ),
                 )
               ],
@@ -114,6 +117,30 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                     child: ReusableCard(
                   color: kActiveCardColor,
+                  cardChild: Column(
+                    children: [
+                      Text(
+                        'WEIGHT',
+                        style: kLabelTextStyle,
+                      ),
+                      Text(
+                        weight.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                            icon: Icons.remove,
+                          ),
+                          SizedBox(width: 10.0,),
+                          RoundIconButton(
+                            icon: Icons.add,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 )),
                 Expanded(
                     child: ReusableCard(
@@ -130,6 +157,27 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+
+  final IconData icon;
+  RoundIconButton({this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: (){},
+      elevation: 6.0,
+      fillColor: Color(0xFF4C4F5E),
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      child: Icon(icon),
     );
   }
 }
