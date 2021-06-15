@@ -6,11 +6,9 @@ import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
 
-  final String bmiResult;
-  final String resultText;
-  final String interpretation;
+  final CalculatorBrain calcBrain;
 
-  ResultsPage({@required this.bmiResult, @required this.resultText, @required this.interpretation});
+  ResultsPage({@required this.calcBrain});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +35,9 @@ class ResultsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(resultText.toUpperCase(), style: kResultTextStyle,),
-                    Text(bmiResult, style: kBMITextStyle,),
-                    Text(interpretation, style: kBodyTextStyle, textAlign: TextAlign.center,),
+                    Text(calcBrain.getResult().toUpperCase(), style: kResultTextStyle,),
+                    Text(calcBrain.calculateBMI(), style: kBMITextStyle,),
+                    Text(calcBrain.getInterpretation(), style: kBodyTextStyle, textAlign: TextAlign.center,),
                     BottomButton(buttonTitle: 'RE-CALCULATE', onTap: () {
                       Navigator.pop(context);
                     })

@@ -20,8 +20,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
-  int weight = 60;
-  int age = 20;
+  int weight = 10;
+  int age = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -121,30 +121,29 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: MinusPlusCard(
-                    label: 'WEIGHT',
-                    unit: 'kg',
-                    value: weight,
-                    onMinus: () {
-                      setState(() {
-                        weight--;
-                      });
-                    },
-                    onPlus: () {
-                      setState(() {
-                        weight++;
-                      });
-                    },
-                  )
-                ),
+                    child: MinusPlusCard(
+                  label: 'WEIGHT',
+                  unit: 'kg',
+                  value: weight,
+                  onMinus: () {
+                    setState(() {
+                      if (weight > 0) weight--;
+                    });
+                  },
+                  onPlus: () {
+                    setState(() {
+                      weight++;
+                    });
+                  },
+                )),
                 Expanded(
                   child: MinusPlusCard(
                     label: 'AGE',
-                    unit: 'y/o',
+                    unit: 'yrs',
                     value: age,
                     onMinus: () {
                       setState(() {
-                        age--;
+                        if (age > 1) age--;
                       });
                     },
                     onPlus: () {
@@ -164,13 +163,11 @@ class _InputPageState extends State<InputPage> {
                     CalculatorBrain(height: height, weight: weight);
                 // Navigator.pushNamed(context, '/results');
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ResultsPage(
-                              bmiResult: calc.calculateBMI(),
-                              resultText: calc.getResult(),
-                              interpretation: calc.getInterpretation(),
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(calcBrain: calc),
+                  ),
+                );
               }),
         ],
       ),
