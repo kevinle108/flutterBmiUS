@@ -120,55 +120,82 @@ class _InputPageState extends State<InputPage> {
             ),
           )),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                    child: MinusPlusCard(
-                  unit: 'ft',
-                  value: feet,
-                  onMinus: () {
-                    setState(() {
-                      if (feet > 0) feet--;
-                    });
-                  },
-                  onPlus: () {
-                    setState(() {
-                      feet++;
-                    });
-                  },
-                )),
-                Expanded(
-                  child: MinusPlusCard(
-                    unit: 'in',
-                    value: inches,
-                    onMinus: () {
-                      setState(() {
-                        if (inches > 1) inches--;
-                      });
-                    },
-                    onPlus: () {
-                      setState(() {
-                        inches++;
-                      });
-                    },
+            child: ReusableCard(
+              color: kActiveCardColor,
+              cardChild: Column(
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
                   ),
-                ),
-              ],
+                  Row(
+                    children: [
+                      Expanded(
+                          child: MinusPlusCard(
+                        unit: 'ft',
+                        value: feet,
+                        onMinus: () {
+                          setState(() {
+                            if (feet > 3) feet--;
+                          });
+                        },
+                        onPlus: () {
+                          setState(() {
+                            feet++;
+                          });
+                        },
+                      )),
+                      Expanded(
+                        child: MinusPlusCard(
+                          unit: 'in',
+                          value: inches,
+                          onMinus: () {
+                            setState(() {
+                              // if (inches > 0) inches--;
+                              if (inches == 0 && feet > 3) {
+                                inches = 11;
+                                feet--;
+                              }
+                              else {
+                                if (inches > 0) inches--;
+                              }
+                            });
+                          },
+                          onPlus: () {
+                            setState(() {
+                              if (inches == 11) {
+                                inches = 0;
+                                feet++;
+                              }
+                              else {
+                                inches++;
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           BottomButton(
               buttonTitle: 'CALCULATE',
               onTap: () {
                 CalculatorBrain calc =
-                    CalculatorBrain(height: weight, weight: feet);
-                // Navigator.pushNamed(context, '/results');
+                    CalculatorBrain(weight: weight, feet: feet, inches: inches);
+                print(calc.calculateBMI());
+                print(calc.getResult());
+                print(calc.getInterpretation());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsPage(calcBrain: calc),
                   ),
                 );
-              }),
+              },
+          ),
         ],
       ),
     );
