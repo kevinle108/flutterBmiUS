@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -174,7 +176,7 @@ class _InputPageState extends State<InputPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
+                                icon: FontAwesomeIcons.minus,
                                 onPress: () {
                                   setState(() {
                                     age--;
@@ -183,7 +185,7 @@ class _InputPageState extends State<InputPage> {
                               ),
                               SizedBox(width: 10.0,),
                               RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
+                                icon: FontAwesomeIcons.plus,
                                 onPress: () {
                                   setState(() {
                                     age++;
@@ -199,7 +201,13 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButton(buttonTitle: 'CALCULATE', onTap: () {
-            Navigator.pushNamed(context, '/results');
+            CalculatorBrain calc = CalculatorBrain(height: height, weight: weight);
+            // Navigator.pushNamed(context, '/results');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(
+              bmiResult: calc.calculateBMI(),
+              resultText: calc.getResult(),
+              interpretation: calc.getInterpretation(),
+            )));
           }),
         ],
       ),
