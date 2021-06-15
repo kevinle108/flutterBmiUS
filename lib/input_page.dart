@@ -5,8 +5,6 @@ import 'constants.dart';
 import 'icon_content.dart';
 import 'reuseable_card.dart';
 
-
-
 enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
@@ -16,6 +14,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +30,19 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                     child: ReusableCard(
-                      onTap: () {
-                        setState(() {
-                          selectedGender = Gender.male;
-                        });
-                      },
-                      color: (selectedGender == Gender.male) ? kActiveCardColor : kInactiveCardColor,
-                      cardChild: IconContent(
-                        iconData: FontAwesomeIcons.mars,
-                        label: 'MALE',
-                      ),
-                    )),
+                  onTap: () {
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
+                  },
+                  color: (selectedGender == Gender.male)
+                      ? kActiveCardColor
+                      : kInactiveCardColor,
+                  cardChild: IconContent(
+                    iconData: FontAwesomeIcons.mars,
+                    label: 'MALE',
+                  ),
+                )),
                 Expanded(
                   child: ReusableCard(
                     onTap: () {
@@ -64,12 +65,40 @@ class _InputPageState extends State<InputPage> {
           Expanded(
               child: ReusableCard(
             color: kActiveCardColor,
-                cardChild: Column(
+            cardChild: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'HEIGHT',
+                  style: kLabelTextStyle,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
-                    Text('HEIGHT', style: kLabelTextStyle,),
+                    Text(
+                      height.toString(),
+                      style: kNumberTextStyle,
+                    ),
+                    Text('cm', style: kLabelTextStyle,),
                   ],
                 ),
+                Slider(
+                  value: height.toDouble(),
+                  min: 120.0,
+                  max: 220.0,
+                  activeColor: Color(0xFFEB1555),
+                  inactiveColor: Color(0xFF8D8E98),
+                  onChanged: (double newValue) {
+                    setState(() {
+                      height = newValue.toInt();
+                    });
+                  },
 
+                )
+              ],
+            ),
           )),
           Expanded(
             child: Row(
