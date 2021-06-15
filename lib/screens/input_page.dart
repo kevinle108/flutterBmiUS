@@ -19,9 +19,11 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  int height = 180;
-  int weight = 50;
-  int age = 20;
+  int weight = 140;
+  int feet = 3;
+  int inches = 0;
+  // int feet = 3;
+  // int inches = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class _InputPageState extends State<InputPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'HEIGHT',
+                  'WEIGHT',
                   style: kLabelTextStyle,
                 ),
                 Row(
@@ -85,11 +87,11 @@ class _InputPageState extends State<InputPage> {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
-                      height.toString(),
+                      weight.toString(),
                       style: kNumberTextStyle,
                     ),
                     Text(
-                      'cm',
+                      'lbs',
                       style: kLabelTextStyle,
                     ),
                   ],
@@ -104,12 +106,12 @@ class _InputPageState extends State<InputPage> {
                     overlayColor: Color(0x29EB1555),
                   ),
                   child: Slider(
-                    value: height.toDouble(),
-                    min: 120.0,
-                    max: 220.0,
+                    value: weight.toDouble(),
+                    min: 80.0,
+                    max: 200.0,
                     onChanged: (double newValue) {
                       setState(() {
-                        height = newValue.toInt();
+                        weight = newValue.toInt();
                       });
                     },
                   ),
@@ -122,33 +124,31 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                     child: MinusPlusCard(
-                  label: 'WEIGHT',
-                  unit: 'kg',
-                  value: weight,
+                  unit: 'ft',
+                  value: feet,
                   onMinus: () {
                     setState(() {
-                      if (weight > 0) weight--;
+                      if (feet > 0) feet--;
                     });
                   },
                   onPlus: () {
                     setState(() {
-                      weight++;
+                      feet++;
                     });
                   },
                 )),
                 Expanded(
                   child: MinusPlusCard(
-                    label: 'AGE',
-                    unit: 'yrs',
-                    value: age,
+                    unit: 'in',
+                    value: inches,
                     onMinus: () {
                       setState(() {
-                        if (age > 1) age--;
+                        if (inches > 1) inches--;
                       });
                     },
                     onPlus: () {
                       setState(() {
-                        age++;
+                        inches++;
                       });
                     },
                   ),
@@ -160,7 +160,7 @@ class _InputPageState extends State<InputPage> {
               buttonTitle: 'CALCULATE',
               onTap: () {
                 CalculatorBrain calc =
-                    CalculatorBrain(height: height, weight: weight);
+                    CalculatorBrain(height: weight, weight: feet);
                 // Navigator.pushNamed(context, '/results');
                 Navigator.push(
                   context,

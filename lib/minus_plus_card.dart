@@ -6,13 +6,12 @@ import 'components/round_icon_button.dart';
 import 'constants.dart';
 
 class MinusPlusCard extends StatelessWidget {
-  final String label;
   final String unit;
   int value;
   final Function onMinus;
   final Function onPlus;
 
-  MinusPlusCard({this.label, this.unit, this.value, this.onMinus, this.onPlus});
+  MinusPlusCard({this.unit, this.value, this.onMinus, this.onPlus});
 
 
   @override
@@ -22,10 +21,6 @@ class MinusPlusCard extends StatelessWidget {
       cardChild: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            label,
-            style: kLabelTextStyle,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.baseline,
