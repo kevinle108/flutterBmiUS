@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
-import 'icon_content.dart';
-import 'reuseable_card.dart';
+import '../components/bottom_button.dart';
+import '../constants.dart';
+import '../components/icon_content.dart';
+import '../components/reuseable_card.dart';
+import '../components/round_icon_button.dart';
 
 enum Gender { male, female }
 
@@ -196,37 +198,14 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            height: kBottomContainerHeight,
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 10),
-          ),
+          BottomButton(buttonTitle: 'CALCULATE', onTap: () {
+            Navigator.pushNamed(context, '/results');
+          }),
         ],
       ),
     );
   }
 }
 
-class RoundIconButton extends StatelessWidget {
 
-  final IconData icon;
-  final Function onPress;
 
-  RoundIconButton({@required this.icon, @required this.onPress});
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onPress,
-      elevation: 0.0,
-      fillColor: Color(0xFF4C4F5E),
-      shape: CircleBorder(),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      child: Icon(icon),
-    );
-  }
-}
