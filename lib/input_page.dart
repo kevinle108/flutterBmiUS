@@ -16,6 +16,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
   int weight = 60;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +157,41 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                     child: ReusableCard(
                   color: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: Icons.remove,
+                                onPress: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 10.0,),
+                              RoundIconButton(
+                                icon: Icons.add,
+                                onPress: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                 )),
               ],
             ),
@@ -177,7 +213,7 @@ class RoundIconButton extends StatelessWidget {
   final IconData icon;
   final Function onPress;
 
-  RoundIconButton({this.icon, this.onPress});
+  RoundIconButton({@required this.icon, @required this.onPress});
 
   @override
   Widget build(BuildContext context) {
