@@ -6,8 +6,8 @@ import 'components/round_icon_button.dart';
 import 'constants.dart';
 
 class MinusPlusCard extends StatelessWidget {
-  String label;
-  String unit;
+  final String label;
+  final String unit;
   int value;
   final Function onMinus;
   final Function onPlus;

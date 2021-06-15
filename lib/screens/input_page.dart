@@ -124,7 +124,7 @@ class _InputPageState extends State<InputPage> {
                   child: MinusPlusCard(
                     label: 'WEIGHT',
                     unit: 'kg',
-                    value: 50,
+                    value: weight,
                     onMinus: () {
                       setState(() {
                         weight--;
@@ -141,7 +141,7 @@ class _InputPageState extends State<InputPage> {
                   child: MinusPlusCard(
                     label: 'AGE',
                     unit: 'y/o',
-                    value: 20,
+                    value: age,
                     onMinus: () {
                       setState(() {
                         age--;
